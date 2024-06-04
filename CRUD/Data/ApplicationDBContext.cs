@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CRUD.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRUD.Data
 {
@@ -9,5 +10,7 @@ namespace CRUD.Data
         {
             
         }
+
+        public DbSet<User> Users { get; set; }
     }
 }
