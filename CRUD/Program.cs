@@ -1,4 +1,10 @@
+using CRUD.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//dependency onjection for db context
+builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SQLConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
