@@ -1,21 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using CRUD.Models;
+using CRUD.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRUD.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+       private readonly ApplicationDBContext _dbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDBContext dbContext)
         {
-            _logger = logger;
+            _dbContext = dbContext;
+        
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _dbContext.Users.ToListAsync());
         }
       
 
