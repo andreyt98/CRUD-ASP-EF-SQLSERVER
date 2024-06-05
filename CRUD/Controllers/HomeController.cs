@@ -3,6 +3,7 @@ using System.Diagnostics;
 using CRUD.Models;
 using CRUD.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CRUD.Controllers
 {
@@ -19,6 +20,27 @@ namespace CRUD.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _dbContext.Users.ToListAsync());
+        }
+
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(User user) {
+
+            if (ModelState.IsValid)
+            {
+                _dbContext.Users.Add(user);
+                await _dbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+            return View();
         }
       
 
