@@ -1,8 +1,54 @@
-﻿@{
+﻿@model IEnumerable<CRUD.Models.User>
+
+@{
     ViewData["Title"] = "Home Page";
 
 }
 
-<div class="text-center">
-    <h1 class="display-4">home</h1>
+<div class="d-flex flex-column">
+    <button class="btn btn-dark p-2 text-light border-0 align-self-end">
+        <a class="text-decoration-none text-light" asp-action="Add" asp-controller="Home">Add user</a>
+    </button>
+    @if (Model.Count() > 0)
+    {
+        <div class=" table-container">
+            <table class="table table-hover">
+            <thead class="bg-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(user => user.Id)</th>
+                    <th>@Html.DisplayNameFor(user => user.Name)</th>
+                    <th>@Html.DisplayNameFor(user => user.Email)</th>
+                    <th>@Html.DisplayNameFor(user => user.Password)</th>
+                    <th>@Html.DisplayNameFor(user => user.CreatedDate)</th>
+                    <th>Options</th>
+                </tr>
+
+
+            </thead>
+            <tbody class="bg-light">
+               
+                @foreach(var user in Model)
+                {
+                <tr>
+                    <td>@Html.DisplayFor(item => user.Id)</td>
+                    <td>@Html.DisplayFor(item => user.Name)</td>
+                    <td>@Html.DisplayFor(item => user.Email)</td>
+                    <td>@Html.DisplayFor(item => user.Password)</td>
+                    <td>@Html.DisplayFor(item => user.CreatedDate)</td>
+                    <td>
+                        <i class="bi bi-pencil-fill"></i>
+                        <i class="bi bi-trash3-fill"> </i>
+                    </td>
+                </tr>
+
+                }
+
+            </tbody>
+        </table>
+        </div>
+    }
+    else
+    {
+        <p class="p-4 text-center">you haven't added users yet!</p>
+    }
 </div>
