@@ -29,17 +29,21 @@
                
                 @foreach(var user in Model)
                 {
-                <tr>
-                    <td>@Html.DisplayFor(item => user.Id)</td>
-                    <td>@Html.DisplayFor(item => user.Name)</td>
-                    <td>@Html.DisplayFor(item => user.Email)</td>
-                    <td>@Html.DisplayFor(item => user.Password)</td>
-                    <td>@Html.DisplayFor(item => user.CreatedDate)</td>
-                    <td>
-                        <i class="bi bi-pencil-fill"></i>
-                        <i class="bi bi-trash3-fill"> </i>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>@Html.DisplayFor(item => user.Id)</td>
+                        <td>@Html.DisplayFor(item => user.Name)</td>
+                        <td>@Html.DisplayFor(item => user.Email)</td>
+                        <td>@Html.DisplayFor(item => user.Password)</td>
+                        <td>@Html.DisplayFor(item => user.CreatedDate)</td>
+                        <td>                        
+                            <a class="text-decoration-none text-dark" asp-action="Edit" asp-route-id="@user.Id" asp-controller="Home">
+                                <i class="bi bi-pencil-fill"></i>
+                            </a>
+                            <a class="text-decoration-none text-dark" asp-action="Edit" asp-route-id="@user.Id" asp-controller="Home">
+                                <i class="bi bi-trash3-fill"> </i>
+                            </a>
+                        </td>
+                    </tr>
 
                 }
 

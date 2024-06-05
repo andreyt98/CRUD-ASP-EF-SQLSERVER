@@ -55,20 +55,20 @@ body {
     border: 1px solid #cacaca;
 }
 
-.table-container table td i {
+.table-container table td a i {
     cursor: pointer;
     font-size: 120%;
 }
 
-.table-container table td i:first-child:hover {
-    color: blue;
-}
+    .table-container table td .bi-pencil-fill:hover {
+        color: blue;
+    }
 
-.table-container table td i:last-child:hover {
-    color: #be0000;
-}
+    .table-container table td .bi-trash3-fill:hover {
+        color: #be0000;
+    }
 
-.table-container table td:last-child i:not(:last-of-type) {
+.table-container table td:last-child a:not(:last-of-type) {
     margin-right: 1rem;
 }
 
