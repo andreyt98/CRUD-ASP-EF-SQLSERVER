@@ -49,13 +49,13 @@ namespace CRUD.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
             var userId = _dbContext.Users.Find(id);
 
             if(userId == null) {
-                return NotFound();
+                return RedirectToAction("Index");
             };
 
             return View(userId);
