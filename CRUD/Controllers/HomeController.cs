@@ -4,6 +4,7 @@ using CRUD.Models;
 using CRUD.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CRUD.Controllers
 {
@@ -40,6 +41,38 @@ namespace CRUD.Controllers
 
                 return RedirectToAction("Index");
             }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var userId = _dbContext.Users.Find(id);
+
+            if(userId == null) {
+                return NotFound();
+            };
+
+            return View(userId);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                _dbContext.Update(user);
+                await _dbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+
+            }
+
             return View();
         }
       
