@@ -75,6 +75,36 @@ namespace CRUD.Controllers
 
             return View();
         }
+        
+        
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {           
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var userId = _dbContext.Users.Find(id);
+
+            if (userId == null)
+            {
+                return RedirectToAction("Index");
+            };
+
+            return View(userId);
+        }
+        
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(User user)
+        {
+
+            _dbContext.Remove(user);
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
